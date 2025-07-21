@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvin Remiigius - Data Scientist & Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e2e8f0;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tag {
+            background-color: #334155;
+            color: #cbd5e1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-wider">Marvin Remiigius</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-sky-400 transition-colors duration-300">About</a>
+                <a href="#experience" class="hover:text-sky-400 transition-colors duration-300">Experience</a>
+                <a href="#projects" class="hover:text-sky-400 transition-colors duration-300">Projects</a>
+                <a href="#skills" class="hover:text-sky-400 transition-colors duration-300">Skills</a>
+                <a href="#contact" class="hover:text-sky-400 transition-colors duration-300">Contact</a>
+            </nav>
+            <a href="C:\Marvin\My_Portfolio" download class="hidden md:inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Download CV
+            </a>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+             <a href="#about" class="block hover:text-sky-400 transition-colors duration-300">About</a>
+             <a href="#experience" class="block hover:text-sky-400 transition-colors duration-300">Experience</a>
+             <a href="#projects" class="block hover:text-sky-400 transition-colors duration-300">Projects</a>
+             <a href="#skills" class="block hover:text-sky-400 transition-colors duration-300">Skills</a>
+             <a href="#contact" class="block hover:text-sky-400 transition-colors duration-300">Contact</a>
+             <a href="/path/to/your/resume.pdf" download class="block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 text-center mt-2">
+                Download CV
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-32">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-20">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                Hi, I'm <span class="gradient-text">Marvin Remiigius</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-8">
+                Data Scientist & Analyst | Business Intelligence | Python Programmer
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#projects" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">View My Work</a>
+                <a href="#contact" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">Get In Touch</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+            <div class="max-w-4xl mx-auto text-slate-300 space-y-4 text-center">
+                <p>
+                    As a Business Data Analyst at Fraemi Vision, I work at the intersection of media and analytics, using data insights to support strategic decisions and improve operational efficiency. I recently interned at Larsen & Toubro EduTech, where I analyzed learner data and platform performance in a real-world EdTech setting.
+                </p>
+                <p>
+                    I'm currently pursuing a B.Tech in Information Technology from Panimalar Engineering College and a credit-linked Data Science program from IIT Guwahati. Passionate about solving complex problems with data, I'm continuously exploring new tools and techniques to grow in the field of data science and create impactful solutions.
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12">Professional Experience</h2>
+            <div class="max-w-3xl mx-auto relative border-l-2 border-slate-700 pl-10">
+                <!-- Experience Item 1 -->
+                <div class="mb-12">
+                    <div class="absolute -left-3 w-6 h-6 bg-sky-500 rounded-full border-4 border-slate-800"></div>
+                    <p class="text-sm font-semibold text-slate-400">Dec 2023 - Present</p>
+                    <h3 class="text-xl font-bold mt-1">Part-time Data Analyst</h3>
+                    <p class="text-md font-medium text-slate-300 mb-3">Fraemi Vision</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-1">
+                        <li>Conducted data-driven analysis on revenue, ROI, and team performance.</li>
+                        <li>Aligned media operations with business objectives for enhanced efficiency.</li>
+                        <li>Delivered insights through dynamic dashboards and visual reporting.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 2 -->
+                <div class="mb-12">
+                    <div class="absolute -left-3 w-6 h-6 bg-sky-500 rounded-full border-4 border-slate-800"></div>
+                    <p class="text-sm font-semibold text-slate-400">Jul 2025 - Aug 2025</p>
+                    <h3 class="text-xl font-bold mt-1">Data and Content Analyst Intern</h3>
+                    <p class="text-md font-medium text-slate-300 mb-3">Larsen & Toubro</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-1">
+                        <li>Reviewed course content to ensure alignment with educational standards.</li>
+                        <li>Analyzed learner engagement metrics to identify structural gaps.</li>
+                        <li>Utilized data analysis and visualization to support platform quality.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12">My Projects</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                
+                <!-- Featured Project Card -->
+                <div class="glass-effect rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 lg:col-span-2">
+                    <div class="md:flex">
+                         <div class="md:w-1/2">
+                            <img src="https://i.ibb.co/fYdjBhrQ/L-T-Edutech-Dashboard.png"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/e2e8f0?text=Image+Not+Found';"
+                                 alt="Tableau Dashboard Preview" class="h-full w-full object-cover">
+                        </div>
+                        <div class="p-8 flex flex-col justify-center md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-3">L&T Edutech Dashboard</h3>
+                            <p class="text-slate-400 mb-4">An interactive Tableau dashboard providing a comprehensive overview of an Edutech company's performance, including sales, profit, user demographics, and channel effectiveness.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tag">Tableau</span>
+                                <span class="tag">Data Visualization</span>
+                                <span class="tag">Business Intelligence</span>
+                            </div>
+                            <a href="https://public.tableau.com/app/profile/marvin.remiigius/viz/LTEdutechDashboard/LTEdutechDashboard?publish=yes" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold">View Dashboard &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="glass-effect rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=ML+Model+Comparator" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">ML Model Comparator & Tuning Dashboard</h3>
+                        <p class="text-slate-400 mb-4">A Streamlit app to train multiple ML models, perform hyperparameter tuning, and visualize performance metrics.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag">Python</span>
+                            <span class="tag">Streamlit</span>
+                            <span class="tag">Scikit-learn</span>
+                        </div>
+                        <a href="https://github.com/Marvin-Remiigius/Model-Comparing-Tuning-Tool" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="glass-effect rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Fake+Job+Detector" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Fake Job Posting Detector</h3>
+                        <p class="text-slate-400 mb-4">An end-to-end pipeline using NLP and classification models to detect fraudulent job postings with a Streamlit dashboard.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                           <span class="tag">Python</span>
+                           <span class="tag">NLP</span>
+                           <span class="tag">Streamlit</span>
+                        </div>
+                        <a href="https://github.com/Marvin-Remiigius/Fake-Job-Detector-Dashboard" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12">My Technical Skills</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="code" class="w-12 h-12 text-sky-400"></i>
+                        <h3 class="font-bold text-lg">Languages</h3>
+                        <p class="text-slate-400">Python, SQL</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="brain-circuit" class="w-12 h-12 text-sky-400"></i>
+                        <h3 class="font-bold text-lg">Data Science & ML</h3>
+                        <p class="text-slate-400">Statistical Modelling, Machine Learning, NLP, Scikit-learn, Data Visualization</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="wrench" class="w-12 h-12 text-sky-400"></i>
+                        <h3 class="font-bold text-lg">Tools & Platforms</h3>
+                        <p class="text-slate-400">Tableau, Streamlit, Business Intelligence</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 text-center">
+            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+            <p class="text-slate-400 max-w-xl mx-auto mb-8">
+                I'm currently seeking new opportunities and am open to freelance projects. If you have a project in mind or just want to chat, feel free to reach out.
+            </p>
+            <div id="contact-info" class="relative inline-block">
+                <a href="mailto:marvinremiigiusj@gmail.com" id="email-link" class="bg-slate-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 inline-block">
+                    marvinremiigiusj@gmail.com
+                </a>
+                <button id="copy-button" class="absolute top-1/2 right-2 -translate-y-1/2 text-slate-400 hover:text-white" title="Copy email">
+                    <i data-lucide="copy" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="copy-success" class="mt-4 text-green-400 opacity-0 transition-opacity duration-300">Email copied to clipboard!</div>
+            
+            <div class="flex justify-center gap-6 mt-8">
+                <a href="https://github.com/Marvin-Remiigius" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="github" class="w-8 h-8"></i></a>
+                <a href="https://www.linkedin.com/in/marvin-remiigius" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-slate-800">
+        <p class="text-slate-500">&copy; 2025 Marvin Remiigius. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Copy email functionality
+        const copyButton = document.getElementById('copy-button');
+        const emailLink = document.getElementById('email-link');
+        const copySuccess = document.getElementById('copy-success');
+
+        copyButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent mailto link from opening
+            const email = emailLink.textContent.trim();
+            
+            // A cross-browser compatible way to copy to clipboard
+            const textArea = document.createElement('textarea');
+            textArea.value = email;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                copySuccess.style.opacity = '1';
+                setTimeout(() => {
+                    copySuccess.style.opacity = '0';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textArea);
+        });
+    </script>
+</body>
+</html>
