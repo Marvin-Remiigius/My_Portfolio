@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,119 +9,162 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Configure Tailwind CSS for class-based dark mode
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
         }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Abstract Background Pattern */
+        .dark body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(56, 189, 248, 0.15), transparent 30%),
+                radial-gradient(circle at 85% 75%, rgba(129, 140, 248, 0.15), transparent 40%);
+            filter: blur(100px);
+            -webkit-filter: blur(100px);
         }
         .gradient-text {
             background: linear-gradient(to right, #38bdf8, #818cf8);
-            background-clip: text; /* Standard property for compatibility */
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
         }
-        .tag {
-            background-color: #334155;
-            color: #cbd5e1;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111827; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563; 
+        }
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        html:not(.dark) ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+        }
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Animation for experience cards */
+        .experience-card {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .experience-card.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-white text-gray-800 dark:bg-black dark:text-gray-300 antialiased transition-colors duration-500">
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold tracking-wider">Marvin Remiigius</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-sky-400 transition-colors duration-300">About</a>
-                <a href="#experience" class="hover:text-sky-400 transition-colors duration-300">Experience</a>
-                <a href="#projects" class="hover:text-sky-400 transition-colors duration-300">Projects</a>
-                <a href="#skills" class="hover:text-sky-400 transition-colors duration-300">Skills</a>
-                <a href="#contact" class="hover:text-sky-400 transition-colors duration-300">Contact</a>
-            </nav>
-            <a href="Marvin Resume.pdf" download class="hidden md:inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
-                Download CV
-            </a>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <i data-lucide="menu"></i>
-            </button>
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="text-xl font-bold tracking-wider text-gray-900 dark:text-white">Marvin Remiigius</a>
+                <nav class="hidden md:flex items-center space-x-8 text-gray-600 dark:text-gray-300">
+                    <a href="#about" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">About</a>
+                    <a href="#experience" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Experience</a>
+                    <a href="#projects" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Skills</a>
+                    <a href="#ai-chatbot" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">AI Twin</a>
+                    <a href="#contact" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Contact</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                        <i data-lucide="sun" class="sun-icon h-5 w-5"></i>
+                        <i data-lucide="moon" class="moon-icon h-5 w-5 hidden"></i>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-             <a href="#about" class="block hover:text-sky-400 transition-colors duration-300">About</a>
-             <a href="#experience" class="block hover:text-sky-400 transition-colors duration-300">Experience</a>
-             <a href="#projects" class="block hover:text-sky-400 transition-colors duration-300">Projects</a>
-             <a href="#skills" class="block hover:text-sky-400 transition-colors duration-300">Skills</a>
-             <a href="#contact" class="block hover:text-sky-400 transition-colors duration-300">Contact</a>
-             <a href="Marvin Resume.pdf" download class="block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 text-center mt-2">
-                Download CV
-            </a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-black">
+            <nav class="px-2 pt-2 pb-4 space-y-2 text-gray-600 dark:text-gray-300">
+                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800">About</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800">Experience</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800">Projects</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800">Skills</a>
+                <a href="#ai-chatbot" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800">AI Twin</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 pt-32">
-
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 pt-20">
         <!-- Hero Section -->
-        <section id="hero" class="text-center py-20">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+        <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center -mt-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
                 Hi, I'm <span class="gradient-text">Marvin Remiigius</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-8">
+            <p class="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-8">
                 Data Scientist & Analyst | Business Intelligence | Python Programmer
             </p>
-            <div class="flex justify-center gap-4">
-                <a href="#projects" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">View My Work</a>
-                <a href="#contact" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">Get In Touch</a>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 w-full sm:w-auto">View My Work</a>
+                <a href="Marvin Resume.pdf" download class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 w-full sm:w-auto">Download CV</a>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
-            <div class="max-w-4xl mx-auto text-slate-300 space-y-4 text-center">
-                <p>
-                    As a Business Data Analyst at Fraemi Vision, I work at the intersection of media and analytics, using data insights to support strategic decisions and improve operational efficiency. I recently interned at Larsen & Toubro EduTech, where I analyzed learner data and platform performance in a real-world EdTech setting.
-                </p>
-                <p>
-                    I'm currently pursuing a B.Tech in Information Technology from Panimalar Engineering College and a credit-linked Data Science program from IIT Guwahati. Passionate about solving complex problems with data, I'm continuously exploring new tools and techniques to grow in the field of data science and create impactful solutions.
-                </p>
+        <section id="about" class="py-24">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">About Me</h2>
+            <div id="about-text" class="max-w-4xl mx-auto text-gray-600 dark:text-gray-400 space-y-4 text-center leading-relaxed">
+                <p>As a Business Data Analyst at Fraemi Vision, I work at the intersection of media and analytics, using data insights to support strategic decisions and improve operational efficiency. I recently interned at Larsen & Toubro EduTech, where I analyzed learner data and platform performance in a real-world EdTech setting.</p>
+                <p>I'm currently pursuing a B.Tech in Information Technology from Panimalar Engineering College and a credit-linked Data Science program from IIT Guwahati. Passionate about solving complex problems with data, I'm continuously exploring new tools and techniques to grow in the field of data science and create impactful solutions.</p>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12">Professional Experience</h2>
-            <div class="max-w-3xl mx-auto relative border-l-2 border-slate-700 pl-10">
-                <!-- Experience Item 1 -->
-                <div class="mb-12">
-                    <div class="absolute -left-3 w-6 h-6 bg-sky-500 rounded-full border-4 border-slate-800"></div>
-                    <p class="text-sm font-semibold text-slate-400">Dec 2023 - Present</p>
-                    <h3 class="text-xl font-bold mt-1">Part-time Data Analyst</h3>
-                    <p class="text-md font-medium text-slate-300 mb-3">Fraemi Vision</p>
-                    <ul class="list-disc list-inside text-slate-400 space-y-1">
+        <section id="experience" class="py-24">
+            <h2 class="text-3xl font-bold text-center mb-16 text-gray-900 dark:text-white">Professional Experience</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <!-- Experience Card 1 -->
+                <div class="experience-card bg-white/50 dark:bg-gray-900/50 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Part-time Data Analyst</h3>
+                        <p class="date text-sm font-semibold text-gray-500 mt-1 sm:mt-0">Dec 2023 - Present</p>
+                    </div>
+                    <p class="company-name text-md font-medium text-blue-600 dark:text-blue-400 mb-4">Fraemi Vision</p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
                         <li>Conducted data-driven analysis on revenue, ROI, and team performance.</li>
                         <li>Aligned media operations with business objectives for enhanced efficiency.</li>
                         <li>Delivered insights through dynamic dashboards and visual reporting.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 2 -->
-                <div class="mb-12">
-                    <div class="absolute -left-3 w-6 h-6 bg-sky-500 rounded-full border-4 border-slate-800"></div>
-                    <p class="text-sm font-semibold text-slate-400">Jul 2025 - Aug 2025</p>
-                    <h3 class="text-xl font-bold mt-1">Data and Content Analyst Intern</h3>
-                    <p class="text-md font-medium text-slate-300 mb-3">Larsen & Toubro</p>
-                    <ul class="list-disc list-inside text-slate-400 space-y-1">
+                <!-- Experience Card 2 -->
+                <div class="experience-card bg-white/50 dark:bg-gray-900/50 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Data and Content Analyst Intern</h3>
+                        <p class="date text-sm font-semibold text-gray-500 mt-1 sm:mt-0">Jul 2025 - Aug 2025</p>
+                    </div>
+                    <p class="company-name text-md font-medium text-blue-600 dark:text-blue-400 mb-4">Larsen & Toubro</p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
                         <li>Reviewed course content to ensure alignment with educational standards.</li>
                         <li>Analyzed learner engagement metrics to identify structural gaps.</li>
                         <li>Utilized data analysis and visualization to support platform quality.</li>
@@ -131,161 +174,267 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12">My Projects</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                
-                <!-- Featured Project Card New -->
-                <div class="glass-effect rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 lg:col-span-2">
-                    <div class="md:flex">
-                         <div class="md:w-1/2">
-                            <img src="https://i.ibb.co/fYdjBhrQ/L-T-Edutech-Dashboard.png"
-                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/e2e8f0?text=Image+Not+Found';"
-                                 alt="Tableau Dashboard Preview" class="h-full w-full object-cover">
+        <section id="projects" class="py-24">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card bg-white/50 dark:bg-gray-900/50 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 border border-gray-200 dark:border-gray-800">
+                    <img src="https://i.ibb.co/fYdjBhrQ/L-T-Edutech-Dashboard.png" onerror="this.onerror=null;this.src='https://placehold.co/600x400/171717/e5e5e5?text=Image+Not+Found';" alt="Tableau Dashboard Preview" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="project-title text-xl font-bold mb-2 text-gray-900 dark:text-white">L&T Edutech Dashboard</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">An interactive Tableau dashboard providing a comprehensive overview of an Edutech company's performance.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Tableau</span>
+                            <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Data Visualization</span>
                         </div>
-                        <div class="p-8 flex flex-col justify-center md:w-1/2">
-                            <h3 class="text-2xl font-bold mb-3">L&T Edutech Dashboard</h3>
-                            <p class="text-slate-400 mb-4">An interactive Tableau dashboard providing a comprehensive overview of an Edutech company's performance, including sales, profit, user demographics, and channel effectiveness.</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="tag">Tableau</span>
-                                <span class="tag">Data Visualization</span>
-                                <span class="tag">Business Intelligence</span>
-                            </div>
-                            <a href="https://public.tableau.com/app/profile/marvin.remiigius/viz/LTEdutechDashboard/LTEdutechDashboard?publish=yes" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold">View Dashboard &rarr;</a>
-                        </div>
+                        <a href="https://public.tableau.com/app/profile/marvin.remiigius/viz/LTEdutechDashboard/LTEdutechDashboard?publish=yes" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-sm">View Dashboard &rarr;</a>
                     </div>
                 </div>
-
                 <!-- Project Card 2 -->
-                <div class="glass-effect rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=ML+Model+Comparator" alt="Project 2" class="w-full h-48 object-cover">
+                <div class="project-card bg-white/50 dark:bg-gray-900/50 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 border border-gray-200 dark:border-gray-800">
+                    <img src="https://placehold.co/600x400/171717/e5e5e5?text=ML+Model+Comparator" alt="Project 2" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">ML Model Comparator & Tuning Dashboard</h3>
-                        <p class="text-slate-400 mb-4">A Streamlit app to train multiple ML models, perform hyperparameter tuning, and visualize performance metrics.</p>
+                        <h3 class="project-title text-xl font-bold mb-2 text-gray-900 dark:text-white">ML Model Comparator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">A Streamlit app to train multiple ML models, tune hyperparameters, and visualize performance metrics.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tag">Python</span>
-                            <span class="tag">Streamlit</span>
-                            <span class="tag">Scikit-learn</span>
+                            <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Streamlit</span>
                         </div>
-                        <a href="https://github.com/Marvin-Remiigius/Model-Comparing-Tuning-Tool" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold">View on GitHub &rarr;</a>
+                        <a href="https://github.com/Marvin-Remiigius/Model-Comparing-Tuning-Tool" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-sm">View on GitHub &rarr;</a>
                     </div>
                 </div>
-
                 <!-- Project Card 3 -->
-                <div class="glass-effect rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="https://placehold.co/600x400/1e293b/e2e8f0?text=Fake+Job+Detector" alt="Project 3" class="w-full h-48 object-cover">
+                <div class="project-card bg-white/50 dark:bg-gray-900/50 rounded-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 border border-gray-200 dark:border-gray-800">
+                    <img src="https://placehold.co/600x400/171717/e5e5e5?text=Fake+Job+Detector" alt="Project 3" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Fake Job Posting Detector</h3>
-                        <p class="text-slate-400 mb-4">An end-to-end pipeline using NLP and classification models to detect fraudulent job postings with a Streamlit dashboard.</p>
+                        <h3 class="project-title text-xl font-bold mb-2 text-gray-900 dark:text-white">Fake Job Posting Detector</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">An end-to-end pipeline using NLP and classification models to detect fraudulent job postings.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                           <span class="tag">Python</span>
-                           <span class="tag">NLP</span>
-                           <span class="tag">Streamlit</span>
+                            <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">NLP</span>
                         </div>
-                        <a href="https://github.com/Marvin-Remiigius/Fake-Job-Detector-Dashboard" target="_blank" class="text-sky-400 hover:text-sky-300 font-semibold">View on GitHub &rarr;</a>
+                        <a href="https://github.com/Marvin-Remiigius/Fake-Job-Detector-Dashboard" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-sm">View on GitHub &rarr;</a>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12">My Technical Skills</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    <div class="flex flex-col items-center gap-2">
-                        <i data-lucide="code" class="w-12 h-12 text-sky-400"></i>
-                        <h3 class="font-bold text-lg">Languages</h3>
-                        <p class="text-slate-400">Python, SQL</p>
-                    </div>
-                    <div class="flex flex-col items-center gap-2">
-                        <i data-lucide="brain-circuit" class="w-12 h-12 text-sky-400"></i>
-                        <h3 class="font-bold text-lg">Data Science & ML</h3>
-                        <p class="text-slate-400">Statistical Modelling, Machine Learning, NLP, Scikit-learn, Data Visualization</p>
-                    </div>
-                    <div class="flex flex-col items-center gap-2">
-                        <i data-lucide="wrench" class="w-12 h-12 text-sky-400"></i>
-                        <h3 class="font-bold text-lg">Tools & Platforms</h3>
-                        <p class="text-slate-400">Tableau, Streamlit, Business Intelligence</p>
-                    </div>
+        <section id="skills" class="py-24">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-4xl mx-auto">
+                <div class="bg-white/50 dark:bg-gray-900/50 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+                    <i data-lucide="code" class="w-12 h-12 text-blue-600 dark:text-blue-400 mx-auto mb-4"></i>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white">Languages</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Python, SQL</p>
+                </div>
+                <div class="bg-white/50 dark:bg-gray-900/50 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+                    <i data-lucide="brain-circuit" class="w-12 h-12 text-blue-600 dark:text-blue-400 mx-auto mb-4"></i>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white">Data Science & ML</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Machine Learning, NLP, Scikit-learn, Data Visualization</p>
+                </div>
+                <div class="bg-white/50 dark:bg-gray-900/50 p-6 rounded-lg border border-gray-200 dark:border-gray-800">
+                    <i data-lucide="wrench" class="w-12 h-12 text-blue-600 dark:text-blue-400 mx-auto mb-4"></i>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white">Tools & Platforms</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Tableau, Streamlit, Business Intelligence</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 text-center">
-            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-            <p class="text-slate-400 max-w-xl mx-auto mb-8">
-                I'm currently seeking new opportunities and am open to freelance projects. If you have a project in mind or just want to chat, feel free to reach out.
-            </p>
-            <div id="contact-info" class="relative inline-block">
-                <a href="mailto:marvinremiigiusj@gmail.com" id="email-link" class="bg-slate-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 inline-block">
-                    marvinremiigiusj@gmail.com
-                </a>
-                <button id="copy-button" class="absolute top-1/2 right-2 -translate-y-1/2 text-slate-400 hover:text-white" title="Copy email">
-                    <i data-lucide="copy" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <div id="copy-success" class="mt-4 text-green-400 opacity-0 transition-opacity duration-300">Email copied to clipboard!</div>
-            
-            <div class="flex justify-center gap-6 mt-8">
-                <a href="https://github.com/Marvin-Remiigius" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="github" class="w-8 h-8"></i></a>
-                <a href="https://www.linkedin.com/in/marvin-remiigius" target="_blank" class="text-slate-400 hover:text-white"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+        <!-- AI Chatbot Section -->
+        <section id="ai-chatbot" class="py-24">
+            <div class="max-w-3xl mx-auto bg-white/50 dark:bg-gray-900/50 rounded-lg p-6 sm:p-8 border border-gray-200 dark:border-gray-800">
+                <h2 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">Ask My AI Twin</h2>
+                <div id="chat-window" class="h-80 bg-white dark:bg-black rounded-md p-4 overflow-y-auto mb-4 border border-gray-200 dark:border-gray-700">
+                    <!-- Chat messages appear here -->
+                </div>
+                <form id="chat-form" class="flex gap-4">
+                    <input type="text" id="chat-input" placeholder="Ask about my projects or skills..." class="flex-grow bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-md px-4 py-2 border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">Send</button>
+                </form>
             </div>
         </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 text-center">
+            <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Get In Touch</h2>
+            <p class="text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-8">I'm currently seeking new opportunities. If you have a project in mind or just want to chat, feel free to reach out.</p>
+            <a href="mailto:marvinremiigiusj@gmail.com" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 inline-block">Say Hello</a>
+            <div class="flex justify-center gap-6 mt-8">
+                <a href="https://github.com/Marvin-Remiigius" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"><i data-lucide="github" class="w-7 h-7"></i></a>
+                <a href="https://www.linkedin.com/in/marvin-remiigius" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"><i data-lucide="linkedin" class="w-7 h-7"></i></a>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center py-8 border-t border-slate-800">
-        <p class="text-slate-500">&copy; 2025 Marvin Remiigius. All Rights Reserved.</p>
+    <footer class="text-center py-8 border-t border-gray-200 dark:border-gray-800">
+        <p class="text-gray-500">&copy; 2025 Marvin Remiigius. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Initialize Lucide icons
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Mobile menu toggle
+        // --- Theme Toggle ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        };
+
+        const toggleTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        };
+        
+        // Set default to dark, but respect user's choice
+        const initialTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(initialTheme);
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+
+        // --- Mobile Menu ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
 
-        // Close mobile menu when a link is clicked
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        // --- Scroll Animations ---
+        const experienceCards = document.querySelectorAll('.experience-card');
+        const cardObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, index * 150);
+                    observer.unobserve(entry.target);
+                }
             });
+        }, { threshold: 0.1 });
+
+        experienceCards.forEach(card => {
+            cardObserver.observe(card);
         });
 
-        // Copy email functionality
-        const copyButton = document.getElementById('copy-button');
-        const emailLink = document.getElementById('email-link');
-        const copySuccess = document.getElementById('copy-success');
+        // --- Gemini API Integration ---
+        const API_KEY = "AIzaSyAHpVwSVkACzfNs8rttVwIud1lpJ4WqhdQ";
 
-        copyButton.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent mailto link from opening
-            const email = emailLink.textContent.trim();
-            
-            // A cross-browser compatible way to copy to clipboard
-            const textArea = document.createElement('textarea');
-            textArea.value = email;
-            document.body.appendChild(textArea);
-            textArea.select();
+        async function callGemini(prompt) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+            const payload = { contents: [{ parts: [{ text: prompt }] }] };
+
             try {
-                document.execCommand('copy');
-                copySuccess.style.opacity = '1';
-                setTimeout(() => {
-                    copySuccess.style.opacity = '0';
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`API call failed: ${response.status}`);
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts) {
+                    return result.candidates[0].content.parts[0].text;
+                }
+                return "Sorry, I couldn't generate a valid response.";
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                return "An error occurred while contacting the AI. Please check the console.";
             }
-            document.body.removeChild(textArea);
+        }
+
+        // --- AI Twin Chatbot ---
+        const chatWindow = document.getElementById('chat-window');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        let portfolioContext = '';
+
+        function getPortfolioContext() {
+            let context = `About Me: ${document.getElementById('about-text').innerText}\n\n`;
+            context += "Experience:\n";
+            document.querySelectorAll('.experience-card').forEach(item => {
+                const title = item.querySelector('h3').innerText;
+                const company = item.querySelector('.company-name').innerText;
+                const date = item.querySelector('.date').innerText;
+                const details = Array.from(item.querySelectorAll('li')).map(li => li.innerText).join(', ');
+                context += `- ${title} at ${company} (${date}): ${details}\n`;
+            });
+            context += "\nProjects:\n";
+            document.querySelectorAll('.project-card').forEach(card => {
+                const title = card.querySelector('.project-title').innerText;
+                const desc = card.querySelector('p').innerText;
+                const tags = Array.from(card.querySelectorAll('span')).map(t => t.innerText).join(', ');
+                context += `- Title: ${title}, Description: ${desc}, Technologies: ${tags}\n`;
+            });
+            context += "\nSkills:\n";
+            document.querySelectorAll('#skills > div > div').forEach(item => {
+                const title = item.querySelector('h3').innerText;
+                const details = item.querySelector('p').innerText;
+                context += `- ${title}: ${details}\n`;
+            });
+            return context;
+        }
+        
+        function addMessageToChat(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `flex mb-4 ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `rounded-lg px-4 py-2 max-w-xs lg:max-w-md ${sender === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-200'}`;
+            bubble.innerHTML = message; // Use innerHTML to render line breaks from AI
+            
+            messageElement.appendChild(bubble);
+            chatWindow.appendChild(messageElement);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+        
+        function welcomeChat() {
+            setTimeout(() => {
+                addMessageToChat("Hello! I'm Marvin's AI Twin. Feel free to ask me anything about his work.", 'ai');
+            }, 500);
+        }
+        
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            addMessageToChat(userMessage, 'user');
+            chatInput.value = '';
+            
+            const loadingBubble = document.createElement('div');
+            loadingBubble.className = 'flex justify-start mb-4';
+            loadingBubble.innerHTML = `<div class="bg-gray-700 rounded-lg px-4 py-2"><div class="animate-pulse flex space-x-2"> <div class="rounded-full bg-gray-500 h-2 w-2"></div> <div class="rounded-full bg-gray-500 h-2 w-2"></div> <div class="rounded-full bg-gray-500 h-2 w-2"></div> </div></div>`;
+            chatWindow.appendChild(loadingBubble);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            const prompt = "You are Marvin Remiigius's AI Twin, a helpful and friendly assistant for his portfolio website. Your personality is professional yet approachable. Based ONLY on the information provided below, answer the user's question. If the answer isn't in the information, say that you don't have information about that but you can ask Marvin directly. Do not make up information.\n\n---\nInformation about Marvin:\n" + portfolioContext + "\n---\n\nUser's Question: \"" + userMessage + "\"";
+
+            const aiResponse = await callGemini(prompt);
+            
+            chatWindow.removeChild(loadingBubble);
+            addMessageToChat(aiResponse.replace(/\n/g, '<br>'), 'ai');
         });
+
+        // Initialize
+        window.onload = () => {
+            portfolioContext = getPortfolioContext();
+            welcomeChat();
+        }
     </script>
 </body>
 </html>
