@@ -332,29 +332,31 @@
             cardObserver.observe(card);
         });
 
-        // --- Gemini API Integration ---
-        const API_KEY = "__GEMINI_API_KEY_PLACEHOLDER__";
-
+        // This is the NEW, SECURE function that calls your Netlify proxy
         async function callGemini(prompt) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
-            const payload = { contents: [{ parts: [{ text: prompt }] }] };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                if (!response.ok) throw new Error(`API call failed: ${response.status}`);
-                const result = await response.json();
-                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts) {
-                    return result.candidates[0].content.parts[0].text;
-                }
-                return "Sorry, I couldn't generate a valid response.";
-            } catch (error) {
-                console.error("Gemini API Error:", error);
-                return "An error occurred while contacting the AI. Please check the console.";
+          // This URL points to the function you created
+          const proxyUrl = '/.netlify/functions/call-gemini';
+        
+          try {
+            const response = await fetch(proxyUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ prompt: prompt })
+            });
+        
+            if (!response.ok) throw new Error(`Serverless function failed with status: ${response.status}`);
+        
+            const result = await response.json();
+        
+            if (result.candidates && result.candidates[0]?.content?.parts[0]) {
+              return result.candidates[0].content.parts[0].text;
             }
+        
+            return "Sorry, I couldn't get a valid response from the AI.";
+          } catch (error) {
+            console.error("Error calling the proxy function:", error);
+            return "An error occurred while trying to contact the AI. Please check the console.";
+          }
         }
 
         // --- AI Twin Chatbot ---
